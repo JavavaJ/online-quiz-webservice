@@ -1,4 +1,7 @@
-const url = 'http://localhost:8080/api/v1/question/articles/7';
+const host = 'https://online-quiz-webservice.herokuapp.com';
+const endpoint = '/api/v1/question/articles/7';
+// const url = 'http://localhost:8080/api/v1/question/articles/7';
+let url = host + endpoint;
 const get = 'GET';
 
 let quizData = undefined;
