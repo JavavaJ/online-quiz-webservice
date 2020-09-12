@@ -22,4 +22,8 @@ public class TopicService {
     public Topic getTopicByTag(String tag) {
         return topicRepo.findTopicByTag(tag);
     }
+
+    public Topic saveTopic(Topic topic) {
+        return topicRepo.save(topic);
+    }
 }

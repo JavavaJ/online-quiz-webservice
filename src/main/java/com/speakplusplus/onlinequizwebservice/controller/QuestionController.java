@@ -2,15 +2,13 @@ package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.model.Question;
 import com.speakplusplus.onlinequizwebservice.service.QuestionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("api/v1/question")
+
 @RestController
+@RequestMapping("api/v1/question")
 public class QuestionController {
 
     private final QuestionService questionService;
@@ -24,6 +22,11 @@ public class QuestionController {
                                               @PathVariable Integer limit) {
         List<Question> questions = questionService.getQuestionsByTopic(topic);
         return questionService.getLimitedList(questions, limit);
+    }
+
+    @PostMapping("/save/questions")
+    public List<Question> saveAllQuestions(@RequestBody List<Question> questions) {
+        return questionService.saveAll(questions);
     }
 
 }

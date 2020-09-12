@@ -35,4 +35,8 @@ public class QuestionService {
             return questions.subList(0, limit);
         }
     }
+
+    public List<Question> saveAll(List<Question> questions) {
+        return questionRepo.saveAll(questions);
+    }
 }
