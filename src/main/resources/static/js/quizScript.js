@@ -1,8 +1,14 @@
 const host = 'https://online-quiz-webservice.herokuapp.com';
-const endpoint = '/api/v1/question/articles/7';
+const questionNum = '7';
+// const host = 'http://localhost:8080';
+const endpoint = '/api/v1/question';
 // const url = 'http://localhost:8080/api/v1/question/articles/7';
-let url = host + endpoint;
+
 const get = 'GET';
+
+let chosenTopic = document.getElementById("chosenTopic").textContent;
+
+let url = host + endpoint + '/' + chosenTopic + '/' + questionNum;
 
 let quizData = undefined;
 

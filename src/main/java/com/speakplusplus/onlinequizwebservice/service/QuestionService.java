@@ -6,6 +6,7 @@ import com.speakplusplus.onlinequizwebservice.repo.QuestionRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class QuestionService {
@@ -34,6 +35,12 @@ public class QuestionService {
         } else {
             return questions.subList(0, limit);
         }
+    }
+
+//  existing topics which are present in all existing questions
+    public Set<Topic> getValidTopics() {
+        Set<String> tags = questionRepo.findDistinctTags();
+        return topicService.getTopicsByUniqueTags(tags);
     }
 
     public List<Question> saveAll(List<Question> questions) {
