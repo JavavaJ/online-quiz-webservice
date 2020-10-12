@@ -7,9 +7,9 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
+@Table(name = "T_TOPICS")
 @NoArgsConstructor
-@Table(name = "Topics")
+@Getter @Setter
 public class Topic {
 
     @Id

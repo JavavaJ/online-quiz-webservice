@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest
+@Sql({"classpath:t_questions.sql", "classpath:t_topics.sql"})
 class QuestionServiceTest {
 
     @Autowired
@@ -102,11 +103,11 @@ class QuestionServiceTest {
         return questions;
     }
 
-    @Test
-    @Sql(scripts = "classpath:test_question.sql")
-    public void testTestTable() {
-        List<Question> questions = questionRepo.findAll();
-        System.out.println(questions);
-    }
+//    @Test
+//    @Sql(scripts = "classpath:test_question.sql")
+//    public void testTestTable() {
+//        List<Question> questions = questionRepo.findAll();
+//        System.out.println(questions);
+//    }
 
 }

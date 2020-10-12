@@ -1,9 +1,13 @@
 package com.speakplusplus.onlinequizwebservice.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Questions")
+@Table(name = "T_QUESTIONS")
 public class Question {
 
     @Id
@@ -98,17 +102,17 @@ public class Question {
         this.tags = tags;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-            "id=" + id +
-            ", question='" + question + '\'' +
-            ", a='" + a + '\'' +
-            ", b='" + b + '\'' +
-            ", c='" + c + '\'' +
-            ", d='" + d + '\'' +
-            ", rightAn='" + rightAn + '\'' +
-            ", tags='" + tags + '\'' +
-            '}';
-    }
+    //    @Override
+//    public String toString() {
+//        return "Question{" +
+//            "id=" + id +
+//            ", question='" + question + '\'' +
+//            ", a='" + a + '\'' +
+//            ", b='" + b + '\'' +
+//            ", c='" + c + '\'' +
+//            ", d='" + d + '\'' +
+//            ", rightAn='" + rightAn + '\'' +
+//            ", tags='" + tags + '\'' +
+//            '}';
+//    }
 }
