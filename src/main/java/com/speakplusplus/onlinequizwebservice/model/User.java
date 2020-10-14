@@ -1,22 +1,42 @@
-//package com.speakplusplus.onlinequizwebservice.model;
-//
-//import javax.persistence.*;
-//import java.util.Set;
-//
-//@Entity
-//@Table(name = "User")
-//public class User {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//
-//    @Column(name = "name")
-//    private String name;
-//
-//    @Column(name = "password")
-//    private String password;
-//
-//    private Set<Role> roles;
-//
-//}
+package com.speakplusplus.onlinequizwebservice.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "T_USER")
+@NoArgsConstructor
+@Getter @Setter
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", password='" + password + '\'' +
+            ", email='" + email + '\'' +
+            '}';
+    }
+}
