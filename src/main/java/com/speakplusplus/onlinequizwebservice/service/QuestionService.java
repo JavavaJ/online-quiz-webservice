@@ -3,21 +3,18 @@ package com.speakplusplus.onlinequizwebservice.service;
 import com.speakplusplus.onlinequizwebservice.model.Question;
 import com.speakplusplus.onlinequizwebservice.model.Topic;
 import com.speakplusplus.onlinequizwebservice.repo.QuestionRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class QuestionService {
 
     private final QuestionRepo questionRepo;
     private final TopicService topicService;
-
-    public QuestionService(QuestionRepo questionRepo, TopicService topicService) {
-        this.questionRepo = questionRepo;
-        this.topicService = topicService;
-    }
 
     public List<Question> findAll() {
         return questionRepo.findAll();
@@ -45,5 +42,9 @@ public class QuestionService {
 
     public List<Question> saveAll(List<Question> questions) {
         return questionRepo.saveAll(questions);
+    }
+
+    public List<Question> getQuestionsByIds(List<Long> ids) {
+        return questionRepo.findAllById(ids);
     }
 }

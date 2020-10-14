@@ -1,15 +1,15 @@
-DROP TABLE IF EXISTS T_QUESTIONS;
+-- DROP TABLE IF EXISTS T_QUESTIONS;
 
-CREATE TABLE T_QUESTIONS (
-                             id IDENTITY PRIMARY KEY,
-                             question VARCHAR(8000),
-                             a VARCHAR(255),
-                             b VARCHAR(255),
-                             c VARCHAR(255),
-                             d VARCHAR(255),
-                             right_an VARCHAR(255),
-                             tags VARCHAR(255)
-);
+-- CREATE TABLE T_QUESTIONS (
+--                              id IDENTITY PRIMARY KEY,
+--                              question VARCHAR(8000),
+--                              a VARCHAR(255),
+--                              b VARCHAR(255),
+--                              c VARCHAR(255),
+--                              d VARCHAR(255),
+--                              right_an VARCHAR(255),
+--                              tags VARCHAR(255)
+-- );
 
 
 INSERT INTO T_QUESTIONS (id, question, a, b, c, d, right_an, tags) VALUES (1, 'A- Hello, what ______ your name?', 'is', 'are', 'am', 'be', 'a', 'to_be');

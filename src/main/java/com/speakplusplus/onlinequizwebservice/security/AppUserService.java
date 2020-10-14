@@ -4,6 +4,7 @@ import com.speakplusplus.onlinequizwebservice.model.Permission;
 import com.speakplusplus.onlinequizwebservice.model.Role;
 import com.speakplusplus.onlinequizwebservice.model.User;
 import com.speakplusplus.onlinequizwebservice.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,13 +17,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AppUserService implements UserDetailsService {
 
     private final UserService userService;
-
-    public AppUserService(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {

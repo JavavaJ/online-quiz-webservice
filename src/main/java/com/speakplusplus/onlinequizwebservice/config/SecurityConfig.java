@@ -1,6 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.config;
 
 import com.speakplusplus.onlinequizwebservice.security.AppUserService;
+import com.speakplusplus.onlinequizwebservice.security.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@ConfigurationProperties(prefix = "security.enable")
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
 //    @Value("${security.enable-csrf}")
@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Autowired
     private PasswordEncoder encoder;
 
-    private String csrf;
-
+    @Autowired
+    private SecurityProperties securityProps;
 
 
     @Override
@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             .antMatchers("/**").permitAll()
             .and().headers().frameOptions().sameOrigin();
 
-        if (!Boolean.parseBoolean(csrf)) {
+        if (!securityProps.isCsrfEnabled()) {
             http.csrf().disable();
         }
     }

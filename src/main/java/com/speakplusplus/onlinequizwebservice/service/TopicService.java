@@ -2,6 +2,7 @@ package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.model.Topic;
 import com.speakplusplus.onlinequizwebservice.repo.TopicRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -9,13 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class TopicService {
 
     private final TopicRepo topicRepo;
-
-    public TopicService(TopicRepo topicRepo) {
-        this.topicRepo = topicRepo;
-    }
 
     public List<Topic> findAll() {
         return topicRepo.findAll();

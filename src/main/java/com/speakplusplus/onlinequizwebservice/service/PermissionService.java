@@ -2,18 +2,16 @@ package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.model.Permission;
 import com.speakplusplus.onlinequizwebservice.repo.PermissionRepo;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class PermissionService {
 
     private final PermissionRepo permissionRepo;
-
-    public PermissionService(PermissionRepo permissionRepo) {
-        this.permissionRepo = permissionRepo;
-    }
 
     @Transactional
     public void save(Permission permission) {

@@ -103,6 +103,18 @@ class QuestionServiceTest {
         return questions;
     }
 
+    @Test
+    public void testQuestionsByIds() {
+        List<Long> ids = Arrays.asList(11L, 22L, 33L, 44L, 55L);
+        List<Question> questions = questionService.getQuestionsByIds(ids);
+
+        assertThat(questions)
+            .extracting(Question::getId)
+            .contains(11L, 22L, 33L, 44L, 55L);
+
+        assertThat(questions.size()).isEqualTo(ids.size());
+    }
+
 //    @Test
 //    @Sql(scripts = "classpath:test_question.sql")
 //    public void testTestTable() {
