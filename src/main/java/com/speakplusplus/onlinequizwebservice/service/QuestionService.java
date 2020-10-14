@@ -5,6 +5,7 @@ import com.speakplusplus.onlinequizwebservice.model.Topic;
 import com.speakplusplus.onlinequizwebservice.repo.QuestionRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -44,6 +45,7 @@ public class QuestionService {
         return questionRepo.saveAll(questions);
     }
 
+    @Transactional
     public List<Question> getQuestionsByIds(List<Long> ids) {
         return questionRepo.findAllById(ids);
     }

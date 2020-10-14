@@ -2,6 +2,7 @@ package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.model.Question;
 import com.speakplusplus.onlinequizwebservice.service.QuestionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,13 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/question")
+@RequiredArgsConstructor
 public class QuestionController {
 
     private final QuestionService questionService;
-
-    public QuestionController(QuestionService questionService) {
-        this.questionService = questionService;
-    }
 
     @GetMapping("/{topic}/{limit}")
     public List<Question> getQuestionsByTopic(@PathVariable String topic,

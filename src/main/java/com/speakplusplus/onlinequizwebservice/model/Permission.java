@@ -1,5 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class Permission {
     @ManyToMany(
         mappedBy = "permissions",
         fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Role> roles = new ArrayList<>();
 
     public Permission(String name) {

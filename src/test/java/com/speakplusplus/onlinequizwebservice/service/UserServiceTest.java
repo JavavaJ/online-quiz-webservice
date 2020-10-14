@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 
@@ -48,6 +51,13 @@ class UserServiceTest {
         assertThatThrownBy(() -> userService.getUserByEmail(nonsense))
             .isInstanceOf(UserNotFoundException.class)
             .hasMessageContaining("User with email: " + nonsense + " not found");
+    }
+
+    @Test
+    public void testGetUsersByIds() {
+        List<User> users = userService.getUsersByIds(Arrays.asList(1L, 2L, 3L));
+        assertThat(users).isNotNull().isNotEmpty();
+        assertThat(users.size()).isEqualTo(3);
     }
 
 }

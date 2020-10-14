@@ -1,5 +1,8 @@
 package com.speakplusplus.onlinequizwebservice.repo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.speakplusplus.onlinequizwebservice.dto.AssignmentDTO;
 import com.speakplusplus.onlinequizwebservice.model.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.Question;
 import com.speakplusplus.onlinequizwebservice.model.User;
@@ -63,5 +66,20 @@ class AssignmentServiceTest {
 
     }
 
+    @Test
+    public void printAssignmentDTOJson() throws JsonProcessingException {
+        Long teacherId = 1L;
+        List<Long> studentIds = Arrays.asList(2L, 3L);
+        List<Long> questionIds = Arrays.asList(227L, 300L, 331L, 357L, 382L);
+
+        AssignmentDTO assignmentDTO = new AssignmentDTO(teacherId, studentIds, questionIds);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(assignmentDTO);
+        System.out.println(json);
+
+//        {"teacherId":1,"studentIds":[2,3],"questionsIds":[227,300,331,357,382]}
+
+    }
 
 }

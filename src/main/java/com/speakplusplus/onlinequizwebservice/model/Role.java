@@ -1,5 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class Role {
     @JoinTable(name = "T_ROLE_PERMISSION",
         joinColumns = {@JoinColumn(name = "fk_role")},
         inverseJoinColumns = {@JoinColumn(name = "fk_permission")})
+    @JsonIgnore
     private Set<Permission> permissions = new HashSet<>();
 
     @Override

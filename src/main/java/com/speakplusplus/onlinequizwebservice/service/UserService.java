@@ -8,6 +8,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,11 @@ public class UserService {
     public User getUserById(Long userId) {
         Optional<User> user = userRepo.findById(userId);
         return user.orElseThrow(() -> new UserNotFoundException(userId));
+    }
+
+    @Transactional
+    public List<User> getUsersByIds(Iterable<Long> ids) {
+        return userRepo.findAllById(ids);
     }
 
     @Transactional
