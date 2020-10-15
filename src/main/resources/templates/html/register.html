@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/registerStyles.css}" />
+<!--    <script src="script.js" defer></script>-->
+</head>
+
+<body>
+<div class="register-page">
+    <div class="form">
+        <form class="register-form">
+            <input type="text" placeholder="name"/>
+            <input type="password" placeholder="password"/>
+            <input type="text" placeholder="email address"/>
+
+            <label>
+                <input type="radio" id="teacher" name="role" value="teacher"/>Teacher
+            </label>
+            <label>
+                <input type="radio" id="student" name="role" value="student"/>Student
+            </label>
+
+
+            <button>create user</button>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
+

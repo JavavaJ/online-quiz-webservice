@@ -20,8 +20,9 @@ public class AppUser implements UserDetails {
 
     public AppUser(String username,
                    String password,
-                   Collection<? extends GrantedAuthority> authorities) {
+                   Collection<? extends GrantedAuthority> authorities, User user) {
         this(username, password, authorities, true, true, true, true);
+        this.user = user;
     }
 
     public AppUser(String username,
@@ -77,5 +78,9 @@ public class AppUser implements UserDetails {
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

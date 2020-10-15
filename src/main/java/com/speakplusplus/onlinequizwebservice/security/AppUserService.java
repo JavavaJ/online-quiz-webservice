@@ -26,7 +26,7 @@ public class AppUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         User user = userService.getUserByEmail(userEmail);
         List<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(user.getRole());
-        return new AppUser(user.getName(), user.getPassword(), grantedAuthorities);
+        return new AppUser(user.getName(), user.getPassword(), grantedAuthorities, user); // todo is user really needed?
     }
 
     private List<GrantedAuthority> getGrantedAuthorities(Role role) {

@@ -3,10 +3,12 @@ package com.speakplusplus.onlinequizwebservice.controller;
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentDTO;
 import com.speakplusplus.onlinequizwebservice.model.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.Question;
+import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
 import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
