@@ -27,8 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/**").permitAll()
-            .and().headers().frameOptions().sameOrigin(); // to enable h2 console
+            .antMatchers("api/v1/teacher").hasRole("TEACHER")
+            .antMatchers("api/v1/student").hasRole("STUDENT")
+            .antMatchers("/login").permitAll()
+            .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+//            .antMatchers("/**").permitAll()
+            .and().headers().frameOptions().sameOrigin()  // to enable h2 console
+            .and().formLogin().loginPage("/login").permitAll()
+            .defaultSuccessUrl("/chooseTopic", true);
 
         if (!securityProps.isCsrfEnabled()) {
             http.csrf().disable();

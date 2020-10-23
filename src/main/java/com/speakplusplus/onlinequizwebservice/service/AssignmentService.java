@@ -1,6 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentDTO;
+import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
 import com.speakplusplus.onlinequizwebservice.model.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.Question;
 import com.speakplusplus.onlinequizwebservice.model.User;
@@ -13,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +55,16 @@ public class AssignmentService {
         return assignmentRepo.findQuestionsById(id);
     }
 
+    @Transactional
+    public List<AssignmentFullDTO> getUserAssignments(Long userId) {
+        User user = userService.getUserById(userId);
+        List<User> userList = Collections.singletonList(user);
+        List<Assignment> assignments = assignmentRepo.findByStudentsIn(userList);
+        return assignments.stream()
+            .map(this::castAssignmentToFullDTO)
+            .collect(Collectors.toList());
+    }
+
     @PostConstruct
     public void init() {
         assignmentService = applicationContext.getBean(AssignmentService.class);
@@ -68,6 +81,17 @@ public class AssignmentService {
         assignment.setStudents(students);
         assignment.setQuestions(questions);
         return assignment;
+    }
+
+    private AssignmentFullDTO castAssignmentToFullDTO(Assignment assignment) {
+        AssignmentFullDTO assignmentFullDTO = new AssignmentFullDTO();
+
+        assignmentFullDTO.setId(assignment.getId());
+        assignmentFullDTO.setTeacherId(assignment.getTeacher()
+            .getId());
+
+        assignmentFullDTO.setQuestions(assignment.getQuestions());
+        return assignmentFullDTO;
     }
 
 }

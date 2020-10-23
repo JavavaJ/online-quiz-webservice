@@ -2,6 +2,7 @@ package com.speakplusplus.onlinequizwebservice.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,6 +23,11 @@ public class GuiController {
     @RequestMapping("chooseTopic")
     public String chooseTopicPage() {
         return "html/chooseTopic";
+    }
+
+    @GetMapping("login")
+    public String getLoginView() {
+        return "html/login";
     }
 
 }

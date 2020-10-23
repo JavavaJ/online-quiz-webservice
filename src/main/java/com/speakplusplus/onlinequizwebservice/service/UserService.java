@@ -8,6 +8,7 @@ import com.speakplusplus.onlinequizwebservice.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class UserService {
 
     private final UserRepo userRepo;
     private final RoleService roleService;
+    private final PasswordEncoder encoder;
 
     @Transactional
     public User getUserById(Long userId) {
@@ -56,7 +58,7 @@ public class UserService {
         User user = new User();
 
         user.setName(userDTO.getName());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(encoder.encode(userDTO.getPassword()));
         user.setEmail(userDTO.getEmail());
 
         Role role = roleService.findById(userDTO.getRoleId());
