@@ -17,8 +17,4 @@ public class AssignmentFullDTO {
     private Long teacherId;
     private List<Question> questions = new ArrayList<>();
 
-    public AssignmentFullDTO(Long teacherId, List<Question> questions) {
-        this.teacherId = teacherId;
-        this.questions = questions;
-    }
 }

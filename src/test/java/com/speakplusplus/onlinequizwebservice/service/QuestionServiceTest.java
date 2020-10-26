@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @Sql({"classpath:t_questions.sql", "classpath:t_topics.sql"})
-class QuestionServiceTest {
+class  QuestionServiceTest {
 
     @Autowired
     private QuestionService questionService;
@@ -115,11 +115,5 @@ class QuestionServiceTest {
         assertThat(questions.size()).isEqualTo(ids.size());
     }
 
-//    @Test
-//    @Sql(scripts = "classpath:test_question.sql")
-//    public void testTestTable() {
-//        List<Question> questions = questionRepo.findAll();
-//        System.out.println(questions);
-//    }
 
 }
