@@ -7,6 +7,8 @@ import com.speakplusplus.onlinequizwebservice.model.Question;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 import java.util.List;
 
@@ -125,7 +127,6 @@ class QuestionParserTest {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
     }
 
 }

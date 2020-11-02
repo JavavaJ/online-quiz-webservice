@@ -30,4 +30,9 @@ public class GuiController {
         return "html/login";
     }
 
+    @GetMapping("main")
+    public String getMainView() {
+        return "html/main";
+    }
+
 }

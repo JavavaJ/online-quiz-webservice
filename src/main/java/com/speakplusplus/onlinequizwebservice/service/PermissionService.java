@@ -4,6 +4,7 @@ import com.speakplusplus.onlinequizwebservice.model.Permission;
 import com.speakplusplus.onlinequizwebservice.repo.PermissionRepo;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
