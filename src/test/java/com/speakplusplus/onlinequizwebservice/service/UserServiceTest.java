@@ -141,4 +141,9 @@ class UserServiceTest {
         // {"name":"John","password":"pass","email":"john@mail.coim","roleId":1}
     }
 
+    @Test
+    public void testToDeleete() {
+
+    }
+
 }

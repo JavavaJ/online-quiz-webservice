@@ -49,13 +49,19 @@ public class QuestionService {
         return questionRepo.saveAll(questions);
     }
 
+//    @Transactional
+//    public List<Long> saveAllAndGetIds(CreateQuestionsDTO createQuestionsDTO) {
+//        List<Question> questions = questionParser.createQuestions(createQuestionsDTO);
+//        List<Question> questionsSaved = questionRepo.saveAll(questions);
+//        return questionsSaved.stream()
+//            .map(Question::getId)
+//            .collect(Collectors.toList());
+//    }
+
     @Transactional
-    public List<Long> saveAll(CreateQuestionsDTO createQuestionsDTO) {
+    public List<Question> saveAll(CreateQuestionsDTO createQuestionsDTO) {
         List<Question> questions = questionParser.createQuestions(createQuestionsDTO);
-        List<Question> questionsSaved = questionRepo.saveAll(questions);
-        return questionsSaved.stream()
-            .map(Question::getId)
-            .collect(Collectors.toList());
+        return questionRepo.saveAll(questions);
     }
 
     @Transactional

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
 .bg-mattBlackLight {
     background-color: #303337;
 }
@@ -100,6 +102,14 @@
         float: left;
         display: none;
     }
+
+    #crossToggle {
+        visibility: hidden;
+        clear: both;
+        float: left;
+        display: none;
+    }
+
     .wrapper .sideMenu {
         margin-top: 4rem;
     }
@@ -109,3 +119,6 @@ nav {
     height: 4rem;
 }
 
+nav a {
+    font-family: 'Lato', sans-serif;
+}

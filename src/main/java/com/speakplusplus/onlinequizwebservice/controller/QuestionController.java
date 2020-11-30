@@ -30,9 +30,19 @@ public class QuestionController {
         return questionService.saveAll(questions);
     }
 
+//    @PostMapping("create")
+//    public List<Long> createQuestions(@RequestBody CreateQuestionsDTO createQuestionsDTO) {
+//        return questionService.saveAllAndGetIds(createQuestionsDTO); // return ids of created questions
+//    }
+
     @PostMapping("create")
-    public List<Long> createQuestions(@RequestBody CreateQuestionsDTO createQuestionsDTO) {
-        return questionService.saveAll(createQuestionsDTO); // return ids of created questions
+    public List<Question> createQuestions(@RequestBody CreateQuestionsDTO createQuestionsDTO) {
+        return questionService.saveAll(createQuestionsDTO);
+    }
+
+    @PostMapping("ids")
+    public List<Question> getQuestionsByIds(@RequestBody List<Long> ids) {
+        return questionService.getQuestionsByIds(ids);
     }
 
 }

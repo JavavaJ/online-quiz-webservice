@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             .antMatchers("api/v1/student/**").hasAuthority("ASSIGNMENT_READ")
             .antMatchers( "index", "/css/*", "/js/*").permitAll()
 ////            .antMatchers("/**").permitAll()
-//            .and().headers().frameOptions().sameOrigin()  // to enable h2 console
+            .and().headers().frameOptions().sameOrigin()  // to enable h2 console
             .and().formLogin().loginPage("/login").permitAll()
             .defaultSuccessUrl("/main", true) // todo change defaultSuccessUrl
             .and().logout();

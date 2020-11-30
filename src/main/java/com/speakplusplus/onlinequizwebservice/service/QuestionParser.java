@@ -12,13 +12,15 @@ import java.util.stream.Collectors;
 @Service
 public class QuestionParser {
 
+    // todo method validate
+
     public List<Question> createQuestions(CreateQuestionsDTO createQuestionsDTO) {
         return createQuestions(createQuestionsDTO.getQuestionsText(),
                                  createQuestionsDTO.getAnswersText());
     }
 
     public List<Question> createQuestions(String plainQuestionsText,
-                                          String plainAnswersText) {
+                                           String plainAnswersText) {
         List<Question> questionsNoAnswers = parseMany(plainQuestionsText);
         List<Question> questionsWithAns = addRightAnswers(questionsNoAnswers, plainAnswersText);
         return questionsWithAns;
