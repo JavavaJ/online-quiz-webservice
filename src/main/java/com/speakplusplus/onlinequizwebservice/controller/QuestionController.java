@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/teacher/question")
 @RequiredArgsConstructor
+@CrossOrigin("*") // change later to my frontend url
 //@PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
 public class QuestionController {
 
