@@ -1,21 +1,39 @@
-//package com.speakplusplus.onlinequizwebservice.controller;
-//
-//import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//@RestController
-//@RequestMapping("echo")
-//@RequiredArgsConstructor
-//public class TestIdentityController {
-//
-//    private final AuthenticationFacade authenticationFacade;
-//
-//    @GetMapping
-//    public Authentication getCurrentUser() {
-//        return authenticationFacade.getAuthentication();
-//    }
-//}
+package com.speakplusplus.onlinequizwebservice.controller;
+
+import com.speakplusplus.onlinequizwebservice.dto.PrincipalDto;
+import com.speakplusplus.onlinequizwebservice.model.User;
+import com.speakplusplus.onlinequizwebservice.security.AppUser;
+import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
+import com.speakplusplus.onlinequizwebservice.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
+
+@RestController
+@RequestMapping("echo")
+@RequiredArgsConstructor
+public class TestIdentityController {
+
+    private final AuthenticationFacade authenticationFacade;
+    private final UserService userService;
+
+    @GetMapping
+    public Authentication getCurrentAuthentication() {
+        return authenticationFacade.getAuthentication();
+    }
+
+    @GetMapping("user")
+    public PrincipalDto getCurrentUser() {
+        // if anonymous user calls this -> there is a cast exception.
+        // there should be check that it is AppUser class
+        AppUser appUser = (AppUser) authenticationFacade.getAuthentication()
+            .getPrincipal();
+        User user = appUser.getUser();
+        return userService.getPrincipalDto(user);
+    }
+
+}

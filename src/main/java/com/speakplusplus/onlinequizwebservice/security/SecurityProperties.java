@@ -5,13 +5,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Configuration
-@ConfigurationProperties(prefix = "security.enable")
+@ConfigurationProperties(prefix = "security")
 public class SecurityProperties {
 
     private String csrf;
 
+    private String jwtSecret;
+
+    private long jwtExpireAfterWeeks;
+
     public String getCsrf() {
         return csrf;
+    }
+
+    public String getJwtSecret() {
+        return jwtSecret;
+    }
+
+    public long getJwtExpireAfterWeeks() {
+        return jwtExpireAfterWeeks;
     }
 
     public boolean isCsrfEnabled() {
@@ -20,5 +32,13 @@ public class SecurityProperties {
 
     public void setCsrf(String csrf) {
         this.csrf = csrf;
+    }
+
+    public void setJwtSecret(String jwtSecret) {
+        this.jwtSecret = jwtSecret;
+    }
+
+    public void setJwtExpireAfterWeeks(long jwtExpireAfterWeeks) {
+        this.jwtExpireAfterWeeks = jwtExpireAfterWeeks;
     }
 }

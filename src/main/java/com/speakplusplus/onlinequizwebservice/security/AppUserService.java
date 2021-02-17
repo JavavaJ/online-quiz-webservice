@@ -25,20 +25,13 @@ public class AppUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         User user = userService.getUserByEmail(userEmail);
-        List<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(user.getRole());
-        return new AppUser(user.getName(), user.getPassword(), grantedAuthorities, user); // todo is user really needed?
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User with userEmail: " + userEmail + " not found");
+        }
+
+        return AppUserFactory.create(user);
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(Role role) {
-        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role.getName()));
 
-        authorities.addAll(
-            role.getPermissions()
-                .stream()
-                .map(el -> new SimpleGrantedAuthority(el.getName()))
-                .collect(Collectors.toList())
-        );
-        return authorities;
-    }
 }

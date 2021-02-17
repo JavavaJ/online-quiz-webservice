@@ -46,6 +46,7 @@ public class AppUser implements UserDetails {
         return username;
     }
 
+    // add annotation @JsonIgnore over some of the getters
     @Override
     public String getPassword() {
         return password;

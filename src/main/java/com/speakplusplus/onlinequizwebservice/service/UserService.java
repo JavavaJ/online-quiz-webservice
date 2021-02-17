@@ -1,5 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
+import com.speakplusplus.onlinequizwebservice.dto.PrincipalDto;
 import com.speakplusplus.onlinequizwebservice.dto.UserDTO;
 import com.speakplusplus.onlinequizwebservice.exception.UserNotFoundException;
 import com.speakplusplus.onlinequizwebservice.model.Role;
@@ -64,5 +65,14 @@ public class UserService {
         Role role = roleService.findById(userDTO.getRoleId());
         user.setRole(role);
         return user;
+    }
+
+    public PrincipalDto getPrincipalDto(User user) {
+        PrincipalDto principal = new PrincipalDto();
+        principal.setId(user.getId());
+        principal.setName(user.getName());
+        principal.setEmail(user.getEmail());
+        principal.setRoleId(user.getRole().getId());
+        return principal;
     }
 }
