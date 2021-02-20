@@ -50,6 +50,7 @@ public class QuizService {
 
         quizDto.setId(quiz.getId());
         quizDto.setName(quiz.getName());
+        quizDto.setDescription(quiz.getDescription());
         quizDto.setTeacherId(quiz.getTeacher().getId());
 
         List<Long> questionIds = quiz.getQuestions()
@@ -69,6 +70,7 @@ public class QuizService {
         Quiz quiz = new Quiz();
 
         quiz.setName(quizDto.getName());
+        quiz.setDescription(quizDto.getDescription());
         quiz.setTeacher(teacher);
         quiz.setQuestions(questions);
 

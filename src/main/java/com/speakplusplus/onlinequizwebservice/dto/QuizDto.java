@@ -14,6 +14,7 @@ public class QuizDto {
 
     private Long id;
     private String name;
+    private String description;
     private Long teacherId;
     private List<Long> questionsIds = new ArrayList<>();
 
