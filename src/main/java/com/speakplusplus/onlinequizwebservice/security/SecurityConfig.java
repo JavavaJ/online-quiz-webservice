@@ -55,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 //            .and().headers().frameOptions().sameOrigin()  // to enable h2 console
             .anyRequest().authenticated()
             .and()
-            .apply(new JwtConfigurer(jwtTokenProvider));
+            .apply(new JwtConfigurer(jwtTokenProvider))
+            .and().cors();
 
 
         if (!securityProps.isCsrfEnabled()) {

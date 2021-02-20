@@ -11,4 +11,13 @@ public class AuthenticationFacade {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
+    public Long getPrincipalUserId() {
+        // todo
+        // if anonymous user calls this -> there is a cast exception.
+        // there should be check that it is AppUser class
+        AppUser appUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return appUser.getUser().getId();
+    }
+
 }
