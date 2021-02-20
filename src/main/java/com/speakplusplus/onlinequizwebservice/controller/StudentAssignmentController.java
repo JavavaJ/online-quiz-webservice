@@ -3,6 +3,7 @@ package com.speakplusplus.onlinequizwebservice.controller;
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
 import com.speakplusplus.onlinequizwebservice.model.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.Question;
+import com.speakplusplus.onlinequizwebservice.model.User;
 import com.speakplusplus.onlinequizwebservice.security.AppUser;
 import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
 import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
@@ -28,16 +29,14 @@ public class StudentAssignmentController {
         return assignmentService.getAssignment(assignmentId);
     }
 
-//    @GetMapping("questions/{assignmentId}")
-//    public List<Question> getQuestions(@PathVariable Long assignmentId) {
-//        return assignmentService.getQuestionListById(assignmentId);
-//    }
+    @GetMapping("all")
+    public List<AssignmentFullDTO> getAllStudentAssignments() {
+        AppUser appUser = (AppUser) authenticationFacade
+            .getAuthentication()
+            .getPrincipal();
+        User student = appUser.getUser();
 
-//    @GetMapping("all")
-//    public List<AssignmentFullDTO> getUserAssignments() {
-//        Authentication authentication = authenticationFacade.getAuthentication();
-//        AppUser appUser = (AppUser) authentication.getPrincipal(); // current User
-//        Long userId = appUser.getUser().getId();
-//        return assignmentService.getUserAssignments(userId);
-//    }
+        return assignmentService.getUserAssignments(student.getId());
+    }
+
 }

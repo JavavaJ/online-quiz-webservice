@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,10 @@ public class UserService {
     public User getUserById(Long userId) {
         Optional<User> user = userRepo.findById(userId);
         return user.orElseThrow(() -> new UserNotFoundException(userId));
+    }
+
+    public Collection<User> getUsersByEmails(Iterable<String> emails) {
+        return userRepo.findAllByEmailIn(emails);
     }
 
     @Transactional

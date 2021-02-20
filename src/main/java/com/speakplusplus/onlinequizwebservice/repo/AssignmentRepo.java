@@ -17,10 +17,7 @@ public interface AssignmentRepo extends JpaRepository<Assignment, Long> {
 //    @Query("select a.questions from Assignment a where a.id = :id")
 //    List<Question> findQuestionsById(@Param("id") Long id);
 
-    List<Assignment> findByStudentsIn(Collection<User> user);
+    List<Assignment> findByStudentsIn(Iterable<User> user);
 
-    @Query("select a from Assignment a where a.quiz.teacher = :teacher")
-    List<Assignment> findByQuiz_Teacher_Id(@Param("teacher") User teacher);
-
-//    List<Assignment> findByQuiz_Teacher_Id(Long teacherId);
+    List<Assignment> findByQuiz_Teacher_Id(Long teacherId);
 }

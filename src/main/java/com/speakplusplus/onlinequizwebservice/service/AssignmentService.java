@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,35 +23,29 @@ public class AssignmentService {
     private final QuestionService questionService;
     private final UserService userService;
     private final AssignmentRepo assignmentRepo;
-    private final ApplicationContext applicationContext;
     private final QuizService quizService;
-
-    private AssignmentService assignmentService;
-
 
     @Transactional
     public Assignment saveAssignment(Assignment assignment) {
         return assignmentRepo.save(assignment);
     }
 
-    // todo
-//    @Transactional
-//    public Long saveAssignment(AssignDTO assignDTO) {
-//        Assignment assignment = new Assignment();
-//
-//        assignment.setName(assignDTO.getName());
-//        Quiz quiz = quizService.getQuiz(assignDTO.getQuizId());
-//        assignment.setQuiz(quiz);
-//
-//
-//    }
+    @Transactional
+    public Long saveAssignment(AssignDTO assignDTO) {
+        Assignment assignment = new Assignment();
 
-//    @Transactional
-//    public Long saveAssignment(AssignmentDTO assignmentDTO) {
-//        Assignment assignment = castDTOtoAssignment(assignmentDTO);
-//        Assignment savedAssignment = assignmentService.saveAssignment(assignment);
-//        return savedAssignment.getId();
-//    }
+        assignment.setName(assignDTO.getName());
+        Quiz quiz = quizService.getQuiz(assignDTO.getQuizId());
+        assignment.setQuiz(quiz);
+
+        Collection<User> students = userService
+            .getUsersByEmails(assignDTO.getStudentEmails());
+
+        assignment.setStudents(new ArrayList<>(students));
+
+        Assignment savedOne = assignmentRepo.save(assignment);
+        return savedOne.getId();
+    }
 
     @Transactional
     public Assignment getAssignment(Long id) {
@@ -62,11 +53,6 @@ public class AssignmentService {
         return assignmentOptional.orElseThrow(() ->
             new RuntimeException("Assignment with id: " + id + " is not found."));
     }
-
-//    @Transactional
-//    public List<Question> getQuestionListById(Long id) {
-//        return assignmentRepo.findQuestionsById(id);
-//    }
 
     @Transactional
     public List<AssignmentFullDTO> getUserAssignments(Long userId) {
@@ -78,23 +64,15 @@ public class AssignmentService {
             .collect(Collectors.toList());
     }
 
-    @PostConstruct
-    public void init() {
-        assignmentService = applicationContext.getBean(AssignmentService.class);
+    @Transactional
+    public List<AssignmentFullDTO> getTeacherAssignments(User teacher) {
+        List<Assignment> assignments = assignmentRepo
+            .findByQuiz_Teacher_Id(teacher.getId());
+        return assignments.stream()
+            .map(this::castAssignmentToFullDTO)
+            .collect(Collectors.toList());
     }
 
-//    private Assignment castDTOtoAssignment(AssignmentDTO assignmentDTO) {
-//        User teacher = userService.getUserById(assignmentDTO.getTeacherId());
-//        List<User> students = userService.getUsersByIds(assignmentDTO.getStudentIds());
-//        List<Question> questions = questionService.getQuestionsByIds(assignmentDTO.getQuestionsIds());
-//
-//        Assignment assignment = new Assignment();
-//
-//        assignment.setTeacher(teacher);
-//        assignment.setStudents(students);
-//        assignment.setQuestions(questions);
-//        return assignment;
-//    }
 
     private AssignmentFullDTO castAssignmentToFullDTO(Assignment assignment) {
         AssignmentFullDTO assignmentFullDTO = new AssignmentFullDTO();

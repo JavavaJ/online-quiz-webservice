@@ -135,7 +135,8 @@ public class AssignmentQuizRepoTest {
             Assignment firstAssignment = buildFirstAssignment(teacher);
             Assignment secondAssignment = buildSecondAssignment(teacher);
 
-            List<Assignment> teacherAssignments = assignmentRepo.findByQuiz_Teacher_Id(teacher);
+            List<Assignment> teacherAssignments = assignmentRepo
+                .findByQuiz_Teacher_Id(teacher.getId());
 
             assertThat(teacherAssignments).isNotNull();
             assertThat(teacherAssignments).isNotEmpty();
