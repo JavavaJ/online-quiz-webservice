@@ -5,16 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssignmentFullDTO {
+public class QuizFullDto {
 
     private Long id;
     private String name;
-    private QuizFullDto quizFullDto;
-
+    private String description;
+    private Long teacherId;
+    private List<Question> questions;
 }

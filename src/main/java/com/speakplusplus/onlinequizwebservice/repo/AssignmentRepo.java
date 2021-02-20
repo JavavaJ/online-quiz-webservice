@@ -14,8 +14,13 @@ import java.util.Optional;
 public interface AssignmentRepo extends JpaRepository<Assignment, Long> {
     Optional<Assignment> findById(Long id);
 
-    @Query("select a.questions from Assignment a where a.id = :id")
-    List<Question> findQuestionsById(@Param("id") Long id);
+//    @Query("select a.questions from Assignment a where a.id = :id")
+//    List<Question> findQuestionsById(@Param("id") Long id);
 
     List<Assignment> findByStudentsIn(Collection<User> user);
+
+    @Query("select a from Assignment a where a.quiz.teacher = :teacher")
+    List<Assignment> findByQuiz_Teacher_Id(@Param("teacher") User teacher);
+
+//    List<Assignment> findByQuiz_Teacher_Id(Long teacherId);
 }

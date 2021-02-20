@@ -1,11 +1,13 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.QuizDto;
+import com.speakplusplus.onlinequizwebservice.dto.QuizFullDto;
 import com.speakplusplus.onlinequizwebservice.model.Question;
 import com.speakplusplus.onlinequizwebservice.model.Quiz;
 import com.speakplusplus.onlinequizwebservice.model.User;
 import com.speakplusplus.onlinequizwebservice.repo.QuizRepo;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +47,18 @@ public class QuizService {
             new RuntimeException("Quiz with id: " + id + " is not found."));
     }
 
+    @Transactional
+    public List<Question> getQuestionsByQuizId(Long id) {
+        Optional<Quiz> quizOptional = quizRepo.findById(id);
+        Quiz quiz = quizOptional.orElseThrow(() ->
+            new RuntimeException("Quiz with id: " + id + " is not found."));
+        List<Question> questions = quiz.getQuestions();
+        questions.forEach(question -> {
+            Hibernate.initialize(question.getId());
+        });
+        return questions;
+    }
+
     public QuizDto mapQuizToDTO(Quiz quiz) {
         QuizDto quizDto = new QuizDto();
 
@@ -60,6 +74,18 @@ public class QuizService {
         quizDto.setQuestionsIds(questionIds);
 
         return quizDto;
+    }
+
+    public QuizFullDto mapQuizToFullDTO(Quiz quiz) {
+        QuizFullDto quizFullDto = new QuizFullDto();
+
+        quizFullDto.setId(quiz.getId());
+        quizFullDto.setName(quiz.getName());
+        quizFullDto.setDescription(quiz.getDescription());
+        quizFullDto.setTeacherId(quiz.getTeacher().getId());
+        quizFullDto.setQuestions(quiz.getQuestions());
+
+        return quizFullDto;
     }
 
     private Quiz mapDTOtoQuiz(QuizDto quizDto) {

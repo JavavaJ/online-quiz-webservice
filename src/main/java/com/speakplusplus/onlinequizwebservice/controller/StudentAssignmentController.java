@@ -28,16 +28,16 @@ public class StudentAssignmentController {
         return assignmentService.getAssignment(assignmentId);
     }
 
-    @GetMapping("questions/{assignmentId}")
-    public List<Question> getQuestions(@PathVariable Long assignmentId) {
-        return assignmentService.getQuestionListById(assignmentId);
-    }
+//    @GetMapping("questions/{assignmentId}")
+//    public List<Question> getQuestions(@PathVariable Long assignmentId) {
+//        return assignmentService.getQuestionListById(assignmentId);
+//    }
 
-    @GetMapping("all")
-    public List<AssignmentFullDTO> getUserAssignments() {
-        Authentication authentication = authenticationFacade.getAuthentication();
-        AppUser appUser = (AppUser) authentication.getPrincipal(); // current User
-        Long userId = appUser.getUser().getId();
-        return assignmentService.getUserAssignments(userId);
-    }
+//    @GetMapping("all")
+//    public List<AssignmentFullDTO> getUserAssignments() {
+//        Authentication authentication = authenticationFacade.getAuthentication();
+//        AppUser appUser = (AppUser) authentication.getPrincipal(); // current User
+//        Long userId = appUser.getUser().getId();
+//        return assignmentService.getUserAssignments(userId);
+//    }
 }

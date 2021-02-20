@@ -1,9 +1,9 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
-import com.speakplusplus.onlinequizwebservice.dto.AssignmentDTO;
-import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
+import com.speakplusplus.onlinequizwebservice.dto.*;
 import com.speakplusplus.onlinequizwebservice.model.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.Question;
+import com.speakplusplus.onlinequizwebservice.model.Quiz;
 import com.speakplusplus.onlinequizwebservice.model.User;
 import com.speakplusplus.onlinequizwebservice.repo.AssignmentRepo;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +27,7 @@ public class AssignmentService {
     private final UserService userService;
     private final AssignmentRepo assignmentRepo;
     private final ApplicationContext applicationContext;
+    private final QuizService quizService;
 
     private AssignmentService assignmentService;
 
@@ -36,12 +37,24 @@ public class AssignmentService {
         return assignmentRepo.save(assignment);
     }
 
-    @Transactional
-    public Long saveAssignment(AssignmentDTO assignmentDTO) {
-        Assignment assignment = castDTOtoAssignment(assignmentDTO);
-        Assignment savedAssignment = assignmentService.saveAssignment(assignment);
-        return savedAssignment.getId();
-    }
+    // todo
+//    @Transactional
+//    public Long saveAssignment(AssignDTO assignDTO) {
+//        Assignment assignment = new Assignment();
+//
+//        assignment.setName(assignDTO.getName());
+//        Quiz quiz = quizService.getQuiz(assignDTO.getQuizId());
+//        assignment.setQuiz(quiz);
+//
+//
+//    }
+
+//    @Transactional
+//    public Long saveAssignment(AssignmentDTO assignmentDTO) {
+//        Assignment assignment = castDTOtoAssignment(assignmentDTO);
+//        Assignment savedAssignment = assignmentService.saveAssignment(assignment);
+//        return savedAssignment.getId();
+//    }
 
     @Transactional
     public Assignment getAssignment(Long id) {
@@ -50,10 +63,10 @@ public class AssignmentService {
             new RuntimeException("Assignment with id: " + id + " is not found."));
     }
 
-    @Transactional
-    public List<Question> getQuestionListById(Long id) {
-        return assignmentRepo.findQuestionsById(id);
-    }
+//    @Transactional
+//    public List<Question> getQuestionListById(Long id) {
+//        return assignmentRepo.findQuestionsById(id);
+//    }
 
     @Transactional
     public List<AssignmentFullDTO> getUserAssignments(Long userId) {
@@ -70,27 +83,29 @@ public class AssignmentService {
         assignmentService = applicationContext.getBean(AssignmentService.class);
     }
 
-    private Assignment castDTOtoAssignment(AssignmentDTO assignmentDTO) {
-        User teacher = userService.getUserById(assignmentDTO.getTeacherId());
-        List<User> students = userService.getUsersByIds(assignmentDTO.getStudentIds());
-        List<Question> questions = questionService.getQuestionsByIds(assignmentDTO.getQuestionsIds());
-
-        Assignment assignment = new Assignment();
-
-        assignment.setTeacher(teacher);
-        assignment.setStudents(students);
-        assignment.setQuestions(questions);
-        return assignment;
-    }
+//    private Assignment castDTOtoAssignment(AssignmentDTO assignmentDTO) {
+//        User teacher = userService.getUserById(assignmentDTO.getTeacherId());
+//        List<User> students = userService.getUsersByIds(assignmentDTO.getStudentIds());
+//        List<Question> questions = questionService.getQuestionsByIds(assignmentDTO.getQuestionsIds());
+//
+//        Assignment assignment = new Assignment();
+//
+//        assignment.setTeacher(teacher);
+//        assignment.setStudents(students);
+//        assignment.setQuestions(questions);
+//        return assignment;
+//    }
 
     private AssignmentFullDTO castAssignmentToFullDTO(Assignment assignment) {
         AssignmentFullDTO assignmentFullDTO = new AssignmentFullDTO();
 
         assignmentFullDTO.setId(assignment.getId());
-        assignmentFullDTO.setTeacherId(assignment.getTeacher()
-            .getId());
+        assignmentFullDTO.setName(assignment.getName());
 
-        assignmentFullDTO.setQuestions(assignment.getQuestions());
+        Quiz quiz = assignment.getQuiz();
+        QuizFullDto quizFullDto = quizService.mapQuizToFullDTO(quiz);
+
+        assignmentFullDTO.setQuizFullDto(quizFullDto);
         return assignmentFullDTO;
     }
 

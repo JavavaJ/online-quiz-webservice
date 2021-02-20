@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "T_ASSIGNMENT")
+@Table(name = "T_ASSIGNMENTS")
 @NoArgsConstructor
 @Getter @Setter
 public class Assignment {
@@ -17,9 +17,11 @@ public class Assignment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private User teacher;
+    @Column(name = "name")
+    private String name;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Quiz quiz;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "T_ASSIGNMENT_STUDENT",
@@ -27,11 +29,6 @@ public class Assignment {
         inverseJoinColumns = {@JoinColumn(name = "fk_student")})
     private List<User> students;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinTable(name = "T_ASSIGNMENT_QUESTIONS",
-        joinColumns = {@JoinColumn(name = "fk_assignment")},
-        inverseJoinColumns = {@JoinColumn(name = "fk_question")})
-    private List<Question> questions;
 
     @Override
     public String toString() {

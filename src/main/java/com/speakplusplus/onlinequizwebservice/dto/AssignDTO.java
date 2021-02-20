@@ -1,20 +1,19 @@
 package com.speakplusplus.onlinequizwebservice.dto;
 
-import com.speakplusplus.onlinequizwebservice.model.Question;
+import com.speakplusplus.onlinequizwebservice.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssignmentFullDTO {
+public class AssignDTO {
 
-    private Long id;
     private String name;
-    private QuizFullDto quizFullDto;
-
+    private Long quizId;
+    private User teacher;
+    private List<String> studentEmails;
 }

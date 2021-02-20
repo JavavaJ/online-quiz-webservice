@@ -32,6 +32,11 @@ public class UserService {
     }
 
     @Transactional
+    public boolean existsById(Long userId) {
+        return userRepo.existsById(userId);
+    }
+
+    @Transactional
     public List<User> getUsersByIds(Iterable<Long> ids) {
         return userRepo.findAllById(ids);
     }
