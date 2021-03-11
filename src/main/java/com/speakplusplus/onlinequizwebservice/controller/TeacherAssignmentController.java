@@ -24,6 +24,8 @@ public class TeacherAssignmentController {
 
     @PostMapping("save")
     public Long saveAssignment(@RequestBody AssignDTO assignDTO) {
+        User teacher = authenticationFacade.getCurrentUser();
+//        assignDTO.setTeacher(teacher);
         return assignmentService.saveAssignment(assignDTO);
     }
 
@@ -34,11 +36,7 @@ public class TeacherAssignmentController {
 
     @GetMapping("all")
     public List<AssignmentFullDTO> getAllTeacherAssignments() {
-        AppUser appUser = (AppUser) authenticationFacade
-            .getAuthentication()
-            .getPrincipal();
-        User teacher = appUser.getUser();
-
+        User teacher = authenticationFacade.getCurrentUser();
         return assignmentService.getTeacherAssignments(teacher);
     }
 

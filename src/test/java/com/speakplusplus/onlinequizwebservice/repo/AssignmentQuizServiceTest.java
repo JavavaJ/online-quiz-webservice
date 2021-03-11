@@ -102,4 +102,39 @@ public class AssignmentQuizServiceTest {
         assignmentService.saveAssignment(assignment2);
     }
 
+    @Test
+    public void getTeacherAssignment() {
+        User teacher = userService.getUserById(2L);
+        User student = userService.getUserById(3L);
+
+        List<Long> ids = Arrays.asList(227L, 300L, 331L, 357L, 382L);
+        List<Question> questions = questionService.getQuestionsByIds(ids);
+
+        Quiz quiz1 = new Quiz();
+        quiz1.setName("First quiz");
+        quiz1.setDescription("This is first quiz");
+        quiz1.setTeacher(teacher);
+        quiz1.setQuestions(questions);
+
+        Quiz savedQuiz1 = quizService.saveQuiz(quiz1);
+
+        Assignment assignment1 = new Assignment();
+        assignment1.setName(savedQuiz1.getName());
+        assignment1.setQuiz(savedQuiz1);
+
+        List<User> studentInList = Arrays.asList(student);
+        assignment1.setStudents(studentInList);
+
+        Assignment savedAssignment1 = assignmentService.saveAssignment(assignment1);
+
+        List<AssignmentFullDTO> teacherAssignments = assignmentService.getTeacherAssignments(teacher);
+
+        assertThat(teacherAssignments).isNotNull();
+        assertThat(teacherAssignments).isNotEmpty();
+
+        assertThat(teacherAssignments.size()).isEqualTo(1);
+
+        System.out.println(teacherAssignments);
+    }
+
 }

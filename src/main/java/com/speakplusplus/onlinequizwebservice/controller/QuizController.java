@@ -30,11 +30,7 @@ public class QuizController {
 
     @GetMapping("all")
     public List<Quiz> getAllMyQuizzes() {
-        AppUser appUser = (AppUser) authenticationFacade
-            .getAuthentication()
-            .getPrincipal();
-        User teacher = appUser.getUser();
-
+        User teacher = authenticationFacade.getCurrentUser();
         return quizService.getQuizzesByTeacher(teacher);
     }
 

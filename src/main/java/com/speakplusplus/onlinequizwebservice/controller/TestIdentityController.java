@@ -28,11 +28,7 @@ public class TestIdentityController {
 
     @GetMapping("user")
     public PrincipalDto getCurrentUser() {
-        // if anonymous user calls this -> there is a cast exception.
-        // there should be check that it is AppUser class
-        AppUser appUser = (AppUser) authenticationFacade.getAuthentication()
-            .getPrincipal();
-        User user = appUser.getUser();
+        User user = authenticationFacade.getCurrentUser();
         return userService.getPrincipalDto(user);
     }
 

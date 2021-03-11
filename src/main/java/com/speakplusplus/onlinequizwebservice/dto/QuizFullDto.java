@@ -17,4 +17,14 @@ public class QuizFullDto {
     private String description;
     private Long teacherId;
     private List<Question> questions;
+
+    @Override
+    public String toString() {
+        return "QuizFullDto{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            ", teacherId=" + teacherId +
+            '}';
+    }
 }

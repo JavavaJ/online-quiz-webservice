@@ -30,33 +30,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
     private static final String STUDENT_ENDPOINT = "api/v1/student/**";
     private static final String TEACHER_ENDPOINT = "api/v1/teacher/**";
+    private static final String H2_CONSOLE_ENDPOINT = "/h2-console/**";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers(TEACHER_ENDPOINT).hasAuthority("ASSIGNMENT_WRITE")
-            .antMatchers(STUDENT_ENDPOINT).hasAuthority("ASSIGNMENT_READ")
-            .antMatchers( "index", "/css/*", "/js/*").permitAll()
-////            .antMatchers("/**").permitAll()
-            .and().headers().frameOptions().sameOrigin()  // to enable h2 console
-            .and().formLogin().loginPage("/login").permitAll()
-            .defaultSuccessUrl("/main", true) // todo change defaultSuccessUrl
-            .and().logout();
-
-
-//        http
-//            .httpBasic().disable()
-//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and()
-//            .authorizeRequests()
-//            .antMatchers(LOGIN_ENDPOINT).permitAll()
+//        http.authorizeRequests()
 //            .antMatchers(TEACHER_ENDPOINT).hasAuthority("ASSIGNMENT_WRITE")
 //            .antMatchers(STUDENT_ENDPOINT).hasAuthority("ASSIGNMENT_READ")
-////            .and().headers().frameOptions().sameOrigin()  // to enable h2 console
-//            .anyRequest().authenticated()
-//            .and()
-//            .apply(new JwtConfigurer(jwtTokenProvider))
-//            .and().cors();
+//            .antMatchers( "index", "/css/*", "/js/*").permitAll()
+//////            .antMatchers("/**").permitAll()
+//            .and().headers().frameOptions().sameOrigin()  // to enable h2 console
+//            .and().formLogin().loginPage("/login").permitAll()
+//            .defaultSuccessUrl("/main", true) // todo change defaultSuccessUrl
+//            .and().logout();
+
+
+        http
+            .httpBasic().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authorizeRequests()
+            .antMatchers(LOGIN_ENDPOINT).permitAll()
+            .antMatchers(H2_CONSOLE_ENDPOINT).permitAll()
+            .antMatchers(TEACHER_ENDPOINT).hasAuthority("ASSIGNMENT_WRITE")
+            .antMatchers(STUDENT_ENDPOINT).hasAuthority("ASSIGNMENT_READ")
+            .anyRequest().authenticated()
+            .and()
+            .apply(new JwtConfigurer(jwtTokenProvider))
+            .and().cors();
+
+        http.headers().frameOptions().sameOrigin();  // to enable h2 console
 
 
         if (!securityProps.isCsrfEnabled()) {

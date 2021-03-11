@@ -1,6 +1,8 @@
 package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
+import com.speakplusplus.onlinequizwebservice.dto.CheckedAssignmentDTO;
+import com.speakplusplus.onlinequizwebservice.dto.SubmitAssignmentDTO;
 import com.speakplusplus.onlinequizwebservice.model.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.Question;
 import com.speakplusplus.onlinequizwebservice.model.User;
@@ -9,10 +11,7 @@ import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
 import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +36,11 @@ public class StudentAssignmentController {
         User student = appUser.getUser();
 
         return assignmentService.getUserAssignments(student.getId());
+    }
+
+    @PostMapping("submit")
+    public CheckedAssignmentDTO checkAssignment(@RequestBody SubmitAssignmentDTO submitAssignmentDTO) {
+        return assignmentService.checkAssignment(submitAssignmentDTO);
     }
 
 }

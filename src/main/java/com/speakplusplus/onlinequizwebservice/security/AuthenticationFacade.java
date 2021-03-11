@@ -1,5 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.security;
 
+import com.speakplusplus.onlinequizwebservice.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,14 @@ public class AuthenticationFacade {
         AppUser appUser = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return appUser.getUser().getId();
+    }
+
+    public User getCurrentUser() {
+        AppUser appUser = (AppUser) SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
+
+        return appUser.getUser();
     }
 
 }
