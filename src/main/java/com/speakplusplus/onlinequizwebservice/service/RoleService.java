@@ -39,10 +39,17 @@ public class RoleService {
 
     @Transactional
     public List<RoleDTO> getAllRoles() {
-        return roleRepo.findAll()
+
+        List<RoleDTO> allRoles = roleRepo.findAll()
             .stream()
             .map(this::mapRoleToDto)
             .collect(Collectors.toList());
+
+        List<RoleDTO> legitRoles = allRoles.stream()
+            .filter(roleDTO -> !roleDTO.getName()
+                .equals("ADMIN"))
+            .collect(Collectors.toList());
+        return legitRoles;
     }
 
     private RoleDTO mapRoleToDto(Role role) {
