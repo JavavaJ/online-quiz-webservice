@@ -1,5 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
+import com.speakplusplus.onlinequizwebservice.dto.RoleDTO;
 import com.speakplusplus.onlinequizwebservice.exception.EntityNotFoundException;
 import com.speakplusplus.onlinequizwebservice.model.Role;
 import com.speakplusplus.onlinequizwebservice.repo.RoleRepo;
@@ -8,14 +9,15 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class RoleService {
 
     private final RoleRepo roleRepo;
-    private Role role;
 
     @Transactional
     public void save(Role role) {
@@ -33,6 +35,21 @@ public class RoleService {
     public Role findById(Long roleId) {
         Optional<Role> roleOptional = roleRepo.findById(roleId);
         return roleOptional.orElseThrow(() -> new EntityNotFoundException(Role.class, roleId));
+    }
+
+    @Transactional
+    public List<RoleDTO> getAllRoles() {
+        return roleRepo.findAll()
+            .stream()
+            .map(this::mapRoleToDto)
+            .collect(Collectors.toList());
+    }
+
+    private RoleDTO mapRoleToDto(Role role) {
+        RoleDTO dto = new RoleDTO();
+        dto.setId(role.getId());
+        dto.setName(role.getName());
+        return dto;
     }
 
 }

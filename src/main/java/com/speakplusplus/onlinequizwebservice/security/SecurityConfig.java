@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private final SecurityProperties securityProps;
     private final JwtTokenProvider jwtTokenProvider;
 
-    private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
+    private static final String LOGIN_ENDPOINT = "/api/v1/auth/**";
     private static final String STUDENT_ENDPOINT = "api/v1/student/**";
     private static final String TEACHER_ENDPOINT = "api/v1/teacher/**";
     private static final String H2_CONSOLE_ENDPOINT = "/h2-console/**";
