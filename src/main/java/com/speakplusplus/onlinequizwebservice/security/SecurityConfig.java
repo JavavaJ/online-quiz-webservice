@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private final SecurityProperties securityProps;
     private final JwtTokenProvider jwtTokenProvider;
 
-    private static final String LOGIN_ENDPOINT = "/api/v1/auth/**";
+    private static final String AUTH_ENDPOINT = "/api/v1/auth/**";
     private static final String STUDENT_ENDPOINT = "api/v1/student/**";
     private static final String TEACHER_ENDPOINT = "api/v1/teacher/**";
     private static final String H2_CONSOLE_ENDPOINT = "/h2-console/**";
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers(LOGIN_ENDPOINT).permitAll()
+            .antMatchers(AUTH_ENDPOINT).permitAll()
             .antMatchers(H2_CONSOLE_ENDPOINT).permitAll()
             .antMatchers(TEACHER_ENDPOINT).hasAuthority("ASSIGNMENT_WRITE")
             .antMatchers(STUDENT_ENDPOINT).hasAuthority("ASSIGNMENT_READ")
@@ -65,6 +65,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         if (!securityProps.isCsrfEnabled()) {
             http.csrf().disable();
         }
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(AUTH_ENDPOINT);
     }
 
     @Override

@@ -50,6 +50,7 @@ public class AuthController {
             Map<Object, Object> response = new HashMap<>();
             response.put("userEmail", userEmail);
             response.put("token", token);
+            response.put("username", user.getName());
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
