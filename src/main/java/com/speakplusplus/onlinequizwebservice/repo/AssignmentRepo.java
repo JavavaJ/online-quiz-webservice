@@ -1,13 +1,9 @@
 package com.speakplusplus.onlinequizwebservice.repo;
 
-import com.speakplusplus.onlinequizwebservice.model.Assignment;
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import com.speakplusplus.onlinequizwebservice.model.User;
+import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 

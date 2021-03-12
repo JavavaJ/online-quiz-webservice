@@ -1,8 +1,8 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.CreateQuestionsDTO;
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import com.speakplusplus.onlinequizwebservice.model.Topic;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
+import com.speakplusplus.onlinequizwebservice.model.core.Topic;
 import com.speakplusplus.onlinequizwebservice.repo.QuestionRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

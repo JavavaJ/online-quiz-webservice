@@ -1,7 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.security;
 
-import com.speakplusplus.onlinequizwebservice.model.Role;
-import com.speakplusplus.onlinequizwebservice.model.User;
+import com.speakplusplus.onlinequizwebservice.model.core.Role;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

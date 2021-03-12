@@ -1,7 +1,5 @@
 package com.speakplusplus.onlinequizwebservice.utils;
 
-import com.speakplusplus.onlinequizwebservice.model.Permission;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

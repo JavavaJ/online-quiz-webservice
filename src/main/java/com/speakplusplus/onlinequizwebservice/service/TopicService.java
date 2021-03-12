@@ -1,6 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
-import com.speakplusplus.onlinequizwebservice.model.Topic;
+import com.speakplusplus.onlinequizwebservice.model.core.Topic;
 import com.speakplusplus.onlinequizwebservice.repo.TopicRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

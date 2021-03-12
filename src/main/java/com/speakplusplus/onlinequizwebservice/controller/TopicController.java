@@ -1,6 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.controller;
 
-import com.speakplusplus.onlinequizwebservice.model.Topic;
+import com.speakplusplus.onlinequizwebservice.model.core.Topic;
 import com.speakplusplus.onlinequizwebservice.service.QuestionService;
 import com.speakplusplus.onlinequizwebservice.service.TopicService;
 import lombok.RequiredArgsConstructor;

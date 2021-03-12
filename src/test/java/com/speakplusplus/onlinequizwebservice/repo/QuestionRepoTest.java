@@ -1,17 +1,14 @@
 package com.speakplusplus.onlinequizwebservice.repo;
 
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import org.assertj.core.api.Assertions;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 

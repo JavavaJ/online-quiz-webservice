@@ -1,6 +1,5 @@
 package com.speakplusplus.onlinequizwebservice.dto;
 
-import com.speakplusplus.onlinequizwebservice.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -3,9 +3,6 @@ package com.speakplusplus.onlinequizwebservice.repo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentDTO;
-import com.speakplusplus.onlinequizwebservice.model.Assignment;
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import com.speakplusplus.onlinequizwebservice.model.User;
 import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
 import com.speakplusplus.onlinequizwebservice.service.QuestionService;
 import com.speakplusplus.onlinequizwebservice.service.UserService;
@@ -16,9 +13,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
 
 
 @SpringBootTest

@@ -1,4 +1,4 @@
-package com.speakplusplus.onlinequizwebservice.model;
+package com.speakplusplus.onlinequizwebservice.model.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "T_PERMISSIONS")
+@Table(name = "T_ROLES")
 @NoArgsConstructor
 @Getter @Setter
-public class Permission {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,19 +22,16 @@ public class Permission {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(
-        mappedBy = "permissions",
-        fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinTable(name = "T_ROLE_PERMISSION",
+        joinColumns = {@JoinColumn(name = "fk_role")},
+        inverseJoinColumns = {@JoinColumn(name = "fk_permission")})
     @JsonIgnore
-    private List<Role> roles = new ArrayList<>();
-
-    public Permission(String name) {
-        this.name = name;
-    }
+    private Set<Permission> permissions = new HashSet<>();
 
     @Override
     public String toString() {
-        return "Permission{" +
+        return "Role{" +
             "id=" + id +
             ", name='" + name + '\'' +
             '}';

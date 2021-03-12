@@ -2,9 +2,8 @@
 package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.dto.QuizDto;
-import com.speakplusplus.onlinequizwebservice.model.Quiz;
-import com.speakplusplus.onlinequizwebservice.model.User;
-import com.speakplusplus.onlinequizwebservice.security.AppUser;
+import com.speakplusplus.onlinequizwebservice.model.core.Quiz;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
 import com.speakplusplus.onlinequizwebservice.service.QuizService;
 import lombok.RequiredArgsConstructor;

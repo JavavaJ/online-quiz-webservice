@@ -1,12 +1,9 @@
 package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.dto.AssignDTO;
-import com.speakplusplus.onlinequizwebservice.dto.AssignmentDTO;
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
-import com.speakplusplus.onlinequizwebservice.model.Assignment;
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import com.speakplusplus.onlinequizwebservice.model.User;
-import com.speakplusplus.onlinequizwebservice.security.AppUser;
+import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
 import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
 import lombok.RequiredArgsConstructor;

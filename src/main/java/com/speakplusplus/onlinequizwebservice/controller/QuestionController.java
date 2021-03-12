@@ -1,10 +1,9 @@
 package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.dto.CreateQuestionsDTO;
-import com.speakplusplus.onlinequizwebservice.model.Question;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
 import com.speakplusplus.onlinequizwebservice.service.QuestionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,10 +1,9 @@
 package com.speakplusplus.onlinequizwebservice.repo;
 
-import com.speakplusplus.onlinequizwebservice.model.Permission;
-import com.speakplusplus.onlinequizwebservice.model.Role;
+import com.speakplusplus.onlinequizwebservice.model.core.Permission;
+import com.speakplusplus.onlinequizwebservice.model.core.Role;
 import com.speakplusplus.onlinequizwebservice.service.PermissionService;
 import com.speakplusplus.onlinequizwebservice.service.RoleService;
-import com.speakplusplus.onlinequizwebservice.utils.Sets;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 

@@ -1,4 +1,4 @@
-package com.speakplusplus.onlinequizwebservice.model;
+package com.speakplusplus.onlinequizwebservice.model.core;
 
 import lombok.*;
 

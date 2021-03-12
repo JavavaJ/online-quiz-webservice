@@ -2,9 +2,9 @@ package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.QuizDto;
 import com.speakplusplus.onlinequizwebservice.dto.QuizFullDto;
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import com.speakplusplus.onlinequizwebservice.model.Quiz;
-import com.speakplusplus.onlinequizwebservice.model.User;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
+import com.speakplusplus.onlinequizwebservice.model.core.Quiz;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.repo.QuizRepo;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;

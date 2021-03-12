@@ -2,14 +2,12 @@ package com.speakplusplus.onlinequizwebservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.speakplusplus.onlinequizwebservice.model.Question;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
 import com.speakplusplus.onlinequizwebservice.repo.QuestionRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener;
 
 import java.util.Arrays;
 import java.util.List;

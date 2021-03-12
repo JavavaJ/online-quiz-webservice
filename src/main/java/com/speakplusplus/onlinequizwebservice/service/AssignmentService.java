@@ -1,18 +1,15 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.*;
-import com.speakplusplus.onlinequizwebservice.model.Assignment;
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import com.speakplusplus.onlinequizwebservice.model.Quiz;
-import com.speakplusplus.onlinequizwebservice.model.User;
+import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
+import com.speakplusplus.onlinequizwebservice.model.core.Quiz;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.repo.AssignmentRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;

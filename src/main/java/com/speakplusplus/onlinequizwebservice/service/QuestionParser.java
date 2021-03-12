@@ -1,7 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.CreateQuestionsDTO;
-import com.speakplusplus.onlinequizwebservice.model.Question;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

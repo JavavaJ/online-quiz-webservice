@@ -4,7 +4,7 @@ import com.speakplusplus.onlinequizwebservice.dto.AuthenticationRequestDto;
 import com.speakplusplus.onlinequizwebservice.dto.LoginDTO;
 import com.speakplusplus.onlinequizwebservice.dto.RoleDTO;
 import com.speakplusplus.onlinequizwebservice.dto.UserDTO;
-import com.speakplusplus.onlinequizwebservice.model.User;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.security.jwt.JwtTokenProvider;
 import com.speakplusplus.onlinequizwebservice.service.RoleService;
 import com.speakplusplus.onlinequizwebservice.service.UserService;

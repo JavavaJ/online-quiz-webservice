@@ -2,7 +2,7 @@ package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.RoleDTO;
 import com.speakplusplus.onlinequizwebservice.exception.EntityNotFoundException;
-import com.speakplusplus.onlinequizwebservice.model.Role;
+import com.speakplusplus.onlinequizwebservice.model.core.Role;
 import com.speakplusplus.onlinequizwebservice.repo.RoleRepo;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;

@@ -1,8 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.security.jwt;
 
-import com.speakplusplus.onlinequizwebservice.model.Permission;
-import com.speakplusplus.onlinequizwebservice.model.Role;
-import com.speakplusplus.onlinequizwebservice.security.AppUser;
+import com.speakplusplus.onlinequizwebservice.model.core.Permission;
+import com.speakplusplus.onlinequizwebservice.model.core.Role;
 import com.speakplusplus.onlinequizwebservice.security.AppUserService;
 import com.speakplusplus.onlinequizwebservice.security.SecurityProperties;
 import io.jsonwebtoken.*;

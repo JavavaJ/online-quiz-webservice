@@ -1,8 +1,8 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
-import com.speakplusplus.onlinequizwebservice.model.Question;
-import com.speakplusplus.onlinequizwebservice.model.Quiz;
-import com.speakplusplus.onlinequizwebservice.model.User;
+import com.speakplusplus.onlinequizwebservice.model.core.Question;
+import com.speakplusplus.onlinequizwebservice.model.core.Quiz;
+import com.speakplusplus.onlinequizwebservice.model.core.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

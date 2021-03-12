@@ -1,8 +1,8 @@
 //package com.speakplusplus.onlinequizwebservice.repo;
 //
-//import com.speakplusplus.onlinequizwebservice.model.Assignment;
-//import com.speakplusplus.onlinequizwebservice.model.Question;
-//import com.speakplusplus.onlinequizwebservice.model.User;
+//import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
+//import com.speakplusplus.onlinequizwebservice.model.core.Question;
+//import com.speakplusplus.onlinequizwebservice.model.core.User;
 //import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
 //import com.speakplusplus.onlinequizwebservice.service.QuestionService;
 //import com.speakplusplus.onlinequizwebservice.service.UserService;
