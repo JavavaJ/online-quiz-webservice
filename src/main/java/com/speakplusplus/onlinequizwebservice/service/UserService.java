@@ -1,5 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
+import com.speakplusplus.onlinequizwebservice.dto.LoginDTO;
 import com.speakplusplus.onlinequizwebservice.dto.PrincipalDto;
 import com.speakplusplus.onlinequizwebservice.dto.UserDTO;
 import com.speakplusplus.onlinequizwebservice.exception.UserNotFoundException;
@@ -84,5 +85,15 @@ public class UserService {
         principal.setEmail(user.getEmail());
         principal.setRoleId(user.getRole().getId());
         return principal;
+    }
+
+    public LoginDTO getLoginDto(User user, String token) {
+        LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setId(user.getId());
+        loginDTO.setUsername(user.getName());
+        loginDTO.setToken(token);
+        loginDTO.setEmail(user.getEmail());
+        loginDTO.setRoleId(user.getRole().getId());
+        return loginDTO;
     }
 }

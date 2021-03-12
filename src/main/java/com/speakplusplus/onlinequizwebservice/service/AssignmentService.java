@@ -59,7 +59,7 @@ public class AssignmentService {
     public List<AssignmentFullDTO> getUserAssignments(Long userId) {
         User user = userService.getUserById(userId);
         List<User> userList = Collections.singletonList(user);
-        List<Assignment> assignments = assignmentRepo.findByStudentsIn(userList);
+        List<Assignment> assignments = assignmentRepo.findByStudentsIn(userList); // todo students may be many
         return assignments.stream()
             .map(this::castAssignmentToFullDTO)
             .collect(Collectors.toList());

@@ -1,6 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.dto.AuthenticationRequestDto;
+import com.speakplusplus.onlinequizwebservice.dto.LoginDTO;
 import com.speakplusplus.onlinequizwebservice.dto.RoleDTO;
 import com.speakplusplus.onlinequizwebservice.dto.UserDTO;
 import com.speakplusplus.onlinequizwebservice.model.User;
@@ -31,12 +32,12 @@ public class AuthController {
     private final RoleService roleService;
 
     @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto loginDto) {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto authRequestDto) {
         try {
 
-            String userEmail = loginDto.getEmail();
+            String userEmail = authRequestDto.getEmail();
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userEmail, loginDto.getPassword())
+                new UsernamePasswordAuthenticationToken(userEmail, authRequestDto.getPassword())
             );
 
             User user = userService.getUserByEmail(userEmail);
@@ -46,11 +47,10 @@ public class AuthController {
             }
 
             String token = jwtTokenProvider.createToken(userEmail, user.getRole());
+            LoginDTO loginDTO = userService.getLoginDto(user, token);
 
             Map<Object, Object> response = new HashMap<>();
-            response.put("userEmail", userEmail);
-            response.put("token", token);
-            response.put("username", user.getName());
+            response.put("loginDTO", loginDTO);
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
