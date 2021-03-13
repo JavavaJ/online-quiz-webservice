@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CheckedAssignmentDTO {
 
-    private Long id; // assignment id
+    private Long id;
+    private Long assignmentId;
     private String name;
     private Integer correctAnswers;
     private Integer totalAnswers;

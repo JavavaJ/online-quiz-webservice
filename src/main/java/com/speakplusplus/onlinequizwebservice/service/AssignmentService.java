@@ -84,44 +84,4 @@ public class AssignmentService {
         assignmentFullDTO.setQuizFullDto(quizFullDto);
         return assignmentFullDTO;
     }
-
-    @Transactional
-    public CheckedAssignmentDTO checkAssignment(SubmitAssignmentDTO submitAssignmentDTO) {
-        List<Long> questionIds = submitAssignmentDTO.getSelections()
-            .stream()
-            .map(QuestionSelectionDTO::getQid)
-            .collect(Collectors.toList());
-
-        List<Question> questions = questionService.getQuestionsByIds(questionIds);
-        Map<Long, Question> id2question = questions
-            .stream()
-            .collect(Collectors.toMap(Question::getId, Function.identity()));
-
-        Map<Long, String> id2selection = submitAssignmentDTO
-            .getSelections()
-            .stream()
-            .collect(Collectors.toMap(QuestionSelectionDTO::getQid, QuestionSelectionDTO::getSelection));
-
-        int correctAnswersNum = 0;
-        for (QuestionSelectionDTO questionSelectionDTO : submitAssignmentDTO.getSelections()) {
-            Long qid = questionSelectionDTO.getQid();
-            String rightAns = id2question.get(qid)
-                .getRightAn()
-                .toLowerCase();
-            String selection = id2selection.get(qid)
-                .toLowerCase();
-
-            if (selection.equals(rightAns)) {
-                correctAnswersNum++;
-            }
-        }
-
-        CheckedAssignmentDTO checkedAssignmentDTO = new CheckedAssignmentDTO();
-        checkedAssignmentDTO.setId(submitAssignmentDTO.getId());
-        checkedAssignmentDTO.setName(submitAssignmentDTO.getName());
-        checkedAssignmentDTO.setTotalAnswers(submitAssignmentDTO.getSelections().size());
-        checkedAssignmentDTO.setCorrectAnswers(correctAnswersNum);
-
-        return checkedAssignmentDTO;
-    }
 }

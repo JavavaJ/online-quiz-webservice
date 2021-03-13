@@ -3,10 +3,12 @@ package com.speakplusplus.onlinequizwebservice.controller;
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
 import com.speakplusplus.onlinequizwebservice.dto.CheckedAssignmentDTO;
 import com.speakplusplus.onlinequizwebservice.dto.SubmitAssignmentDTO;
+import com.speakplusplus.onlinequizwebservice.model.AssignmentReport;
 import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.security.AppUser;
 import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
+import com.speakplusplus.onlinequizwebservice.service.AssignmentReportService;
 import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.List;
 public class StudentAssignmentController {
 
     private final AssignmentService assignmentService;
+    private final AssignmentReportService assignmentReportService;
     private final AuthenticationFacade authenticationFacade;
 
     @GetMapping("{assignmentId}")
@@ -28,17 +31,16 @@ public class StudentAssignmentController {
 
     @GetMapping("all")
     public List<AssignmentFullDTO> getAllStudentAssignments() {
-        AppUser appUser = (AppUser) authenticationFacade
-            .getAuthentication()
-            .getPrincipal();
-        User student = appUser.getUser();
+        User student = authenticationFacade.getCurrentUser();
 
         return assignmentService.getUserAssignments(student.getId());
     }
 
     @PostMapping("submit")
     public CheckedAssignmentDTO checkAssignment(@RequestBody SubmitAssignmentDTO submitAssignmentDTO) {
-        return assignmentService.checkAssignment(submitAssignmentDTO);
+        User student = authenticationFacade.getCurrentUser();
+        AssignmentReport assignmentReport = assignmentReportService.processSubmit(submitAssignmentDTO, student);
+        return assignmentReportService.mapAssignmentReportToCheckedAssignmentDTO(assignmentReport);
     }
 
 }
