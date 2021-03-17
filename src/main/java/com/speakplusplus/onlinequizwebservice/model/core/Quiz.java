@@ -17,6 +17,10 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private EntityStatus status;
+
     @Column(name = "name")
     private String name;
 

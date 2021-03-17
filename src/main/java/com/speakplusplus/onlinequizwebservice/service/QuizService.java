@@ -2,6 +2,7 @@ package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.QuizDto;
 import com.speakplusplus.onlinequizwebservice.dto.QuizFullDto;
+import com.speakplusplus.onlinequizwebservice.model.core.EntityStatus;
 import com.speakplusplus.onlinequizwebservice.model.core.Question;
 import com.speakplusplus.onlinequizwebservice.model.core.Quiz;
 import com.speakplusplus.onlinequizwebservice.model.core.User;
@@ -29,6 +30,11 @@ public class QuizService {
     }
 
     @Transactional
+    public List<Quiz> getArchivedQuizzesByTeacher(User teacher) {
+        return quizRepo.findQuizzesByTeacherAndStatus(teacher, EntityStatus.ARCHIVED);
+    }
+
+    @Transactional
     public Quiz saveQuiz(Quiz quiz) {
         return quizRepo.save(quiz);
     }
@@ -36,6 +42,7 @@ public class QuizService {
     @Transactional
     public QuizDto saveQuiz(QuizDto quizDto) {
         Quiz quiz = mapDTOtoQuiz(quizDto);
+        quiz.setStatus(EntityStatus.ACTIVE);
         Quiz savedQuiz = quizRepo.save(quiz);
         return mapQuizToDTO(savedQuiz);
     }
@@ -45,6 +52,16 @@ public class QuizService {
         Optional<Quiz> quiz = quizRepo.findById(id);
         return quiz.orElseThrow(() ->
             new RuntimeException("Quiz with id: " + id + " is not found."));
+    }
+
+    @Transactional
+    public void updateStatus(Long id, EntityStatus status) {
+        quizRepo.updateStatus(id, status);
+    }
+
+    @Transactional
+    public void deleteQuiz(Long id) {
+        quizRepo.deleteById(id);
     }
 
     @Transactional
@@ -102,5 +119,6 @@ public class QuizService {
 
         return quiz;
     }
+
 
 }
