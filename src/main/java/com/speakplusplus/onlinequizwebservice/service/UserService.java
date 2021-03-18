@@ -9,6 +9,7 @@ import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +26,16 @@ public class UserService {
     private final RoleService roleService;
     private final PasswordEncoder encoder;
 
+    @Autowired
+    private UserService self;
+
     @Transactional
     public User getUserById(Long userId) {
         Optional<User> user = userRepo.findById(userId);
         return user.orElseThrow(() -> new UserNotFoundException(userId));
     }
 
+    @Transactional
     public Collection<User> getUsersByEmails(Iterable<String> emails) {
         return userRepo.findAllByEmailIn(emails);
     }
@@ -38,6 +43,21 @@ public class UserService {
     @Transactional
     public boolean existsById(Long userId) {
         return userRepo.existsById(userId);
+    }
+
+    @Transactional
+    public boolean existsByEmail(String email) {
+        return userRepo.existsByEmail(email);
+    }
+
+    @Transactional
+    public boolean existAll(Collection<String> emails) {
+        emails.forEach(email -> {
+            if (!self.existsByEmail(email)) {
+                throw new UserNotFoundException(email);
+            }
+        });
+        return true;
     }
 
     @Transactional

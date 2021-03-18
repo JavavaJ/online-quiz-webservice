@@ -32,7 +32,12 @@ public class UserRepoTest {
             .map(email -> userRepo.findUserByEmail(email).get())
             .collect(Collectors.toList());
 
+        System.out.println("Users: " + users.toString());
+
         Collection<User> multipleUsers = userRepo.findAllByEmailIn(emails);
+
+        System.out.println("multipleUsers: " + multipleUsers.toString());
+
 
         assertThat(multipleUsers).isNotNull();
         assertThat(multipleUsers).isNotEmpty();
