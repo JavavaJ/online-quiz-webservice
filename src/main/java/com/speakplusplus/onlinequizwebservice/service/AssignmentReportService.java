@@ -3,6 +3,7 @@ package com.speakplusplus.onlinequizwebservice.service;
 import com.speakplusplus.onlinequizwebservice.dto.CheckedAssignmentDTO;
 import com.speakplusplus.onlinequizwebservice.dto.QuestionSelectionDTO;
 import com.speakplusplus.onlinequizwebservice.dto.SubmitAssignmentDTO;
+import com.speakplusplus.onlinequizwebservice.exception.EntityNotFoundException;
 import com.speakplusplus.onlinequizwebservice.model.AnsweredQuestion;
 import com.speakplusplus.onlinequizwebservice.model.AssignmentReport;
 import com.speakplusplus.onlinequizwebservice.model.core.Question;
@@ -34,7 +35,7 @@ public class AssignmentReportService {
     public AssignmentReport getReport(Long id) {
         Optional<AssignmentReport> report = assignmentReportRepo.findById(id);
         return report.orElseThrow(() ->
-            new RuntimeException("AssignmentReport with id: " + id + " is not found."));
+            new EntityNotFoundException(AssignmentReport.class, id));
     }
 
     @Transactional

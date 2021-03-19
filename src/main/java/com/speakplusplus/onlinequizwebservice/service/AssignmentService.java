@@ -1,10 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.*;
-import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
-import com.speakplusplus.onlinequizwebservice.model.core.Question;
-import com.speakplusplus.onlinequizwebservice.model.core.Quiz;
-import com.speakplusplus.onlinequizwebservice.model.core.User;
+import com.speakplusplus.onlinequizwebservice.model.core.*;
 import com.speakplusplus.onlinequizwebservice.repo.AssignmentRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +19,7 @@ public class AssignmentService {
     private final UserService userService;
     private final AssignmentRepo assignmentRepo;
     private final QuizService quizService;
+    private final StudyGroupService groupService;
 
     @Transactional
     public Assignment saveAssignment(Assignment assignment) {
@@ -40,6 +38,20 @@ public class AssignmentService {
             .getUsersByEmails(assignDTO.getStudentEmails());
 
         assignment.setStudents(new ArrayList<>(students));
+
+        Assignment savedOne = assignmentRepo.save(assignment);
+        return savedOne.getId();
+    }
+
+    @Transactional
+    public Long saveAssignment(AssignToGroupDTO dto) {
+        Assignment assignment = new Assignment();
+        assignment.setName(dto.getName());
+        Quiz quiz = quizService.getQuiz(dto.getQuizId());
+        assignment.setQuiz(quiz);
+
+        StudyGroup group = groupService.getGroupById(dto.getGroupId());
+        assignment.setStudents(new ArrayList<>(group.getStudents()));
 
         Assignment savedOne = assignmentRepo.save(assignment);
         return savedOne.getId();
@@ -84,4 +96,6 @@ public class AssignmentService {
         assignmentFullDTO.setQuizFullDto(quizFullDto);
         return assignmentFullDTO;
     }
+
+
 }

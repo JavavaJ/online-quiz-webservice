@@ -1,6 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.controller;
 
 import com.speakplusplus.onlinequizwebservice.dto.AssignDTO;
+import com.speakplusplus.onlinequizwebservice.dto.AssignToGroupDTO;
 import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
 import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.core.User;
@@ -19,11 +20,14 @@ public class TeacherAssignmentController {
     private final AssignmentService assignmentService;
     private final AuthenticationFacade authenticationFacade;
 
-    @PostMapping("save")
+    @PostMapping("save/student")
     public Long saveAssignment(@RequestBody AssignDTO assignDTO) {
-        User teacher = authenticationFacade.getCurrentUser();
-//        assignDTO.setTeacher(teacher);
         return assignmentService.saveAssignment(assignDTO);
+    }
+
+    @PostMapping("save/group")
+    public Long saveAssignment(@RequestBody AssignToGroupDTO dto) {
+        return assignmentService.saveAssignment(dto);
     }
 
     @GetMapping("{assignmentId}")

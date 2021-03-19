@@ -4,9 +4,13 @@ import com.speakplusplus.onlinequizwebservice.model.core.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -42,4 +46,13 @@ public class AssignmentReport {
 
     @Column(name = "total_answers")
     private Integer totalAnswers;
+
+    @Column(name = "created")
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.speakplusplus.onlinequizwebservice.service;
 
 import com.speakplusplus.onlinequizwebservice.dto.StudyGroupDTO;
+import com.speakplusplus.onlinequizwebservice.exception.EntityNotFoundException;
 import com.speakplusplus.onlinequizwebservice.model.core.StudyGroup;
 import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.repo.StudyGroupRepo;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,5 +43,17 @@ public class StudyGroupService {
         System.out.println("Service Students: " + students.toString());
         group.setStudents(students);
         return studyGroupRepo.save(group);
+    }
+
+    @Transactional
+    public List<StudyGroup> getAll(User teacher) {
+        return studyGroupRepo.findAllByTeacher(teacher);
+    }
+
+    @Transactional
+    public StudyGroup getGroupById(Long groupId) {
+        Optional<StudyGroup> groupOptional = studyGroupRepo.findById(groupId);
+        return groupOptional
+            .orElseThrow(() -> new EntityNotFoundException(StudyGroup.class, groupId));
     }
 }

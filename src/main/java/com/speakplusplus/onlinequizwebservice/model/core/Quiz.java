@@ -3,8 +3,12 @@ package com.speakplusplus.onlinequizwebservice.model.core;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -37,5 +41,20 @@ public class Quiz {
         inverseJoinColumns = {@JoinColumn(name = "fk_question")})
     private List<Question> questions;
 
+    @Column(name = "created")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 
 }

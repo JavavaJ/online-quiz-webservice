@@ -1,5 +1,6 @@
 package com.speakplusplus.onlinequizwebservice.dto;
 
+import com.speakplusplus.onlinequizwebservice.model.core.StudyGroup;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssignDTO {
+public class AssignToGroupDTO {
 
     private String name;
     private Long quizId;
-    private List<String> studentEmails;
+    private Long groupId;
 }
