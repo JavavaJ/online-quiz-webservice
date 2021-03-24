@@ -40,7 +40,11 @@ public class AssignmentReportService {
 
     @Transactional
     public AssignmentReport processSubmit(SubmitAssignmentDTO submitDTO, User student) { // todo change return type
+
         Long assignmentId = submitDTO.getId();
+
+        // update assignment as completed
+        assignmentService.updateIsCompleted(assignmentId);
 
         AssignmentReport assignmentReport = new AssignmentReport();
         assignmentReport.setAssignmentId(assignmentId);

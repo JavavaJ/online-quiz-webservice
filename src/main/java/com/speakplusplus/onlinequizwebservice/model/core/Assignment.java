@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.Date;
 
@@ -36,21 +37,26 @@ public class Assignment {
         inverseJoinColumns = {@JoinColumn(name = "fk_student")})
     private Collection<User> students;
 
-    @Column(name = "created")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime createdAt;
 
-    @Column(name = "updated")
-    private LocalDateTime updatedAt;
+    @Column(name = "updated", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime updatedAt;
 
+    @Column(name = "isCompleted")
+    private Boolean isCompleted = Boolean.FALSE;
+
+    @Column(name = "completed_at", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime completedAt;
 
     @PrePersist
     public void prePersist() {
-        createdAt = LocalDateTime.now();
+        createdAt = OffsetDateTime.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updatedAt = LocalDateTime.now();
+        updatedAt = OffsetDateTime.now();
     }
 
 

@@ -12,5 +12,6 @@ public class AssignmentFullDTO {
     private Long id;
     private String name;
     private QuizFullDto quizFullDto;
+    private Boolean isCompleted;
 
 }

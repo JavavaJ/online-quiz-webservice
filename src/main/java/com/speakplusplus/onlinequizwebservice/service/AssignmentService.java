@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -83,6 +84,17 @@ public class AssignmentService {
             .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void updateIsCompleted(Long assignmentId) {
+        assignmentRepo.updateIsCompleted(assignmentId, Boolean.TRUE, OffsetDateTime.now());
+    }
+
+    @Transactional
+    public Long countUncompleted(User student) {
+        return assignmentRepo.countByIsCompletedAndStudentsIn(
+            Boolean.FALSE,
+            Collections.singletonList(student));
+    }
 
     private AssignmentFullDTO castAssignmentToFullDTO(Assignment assignment) {
         AssignmentFullDTO assignmentFullDTO = new AssignmentFullDTO();
@@ -94,6 +106,7 @@ public class AssignmentService {
         QuizFullDto quizFullDto = quizService.mapQuizToFullDTO(quiz);
 
         assignmentFullDTO.setQuizFullDto(quizFullDto);
+        assignmentFullDTO.setIsCompleted(assignment.getIsCompleted());
         return assignmentFullDTO;
     }
 

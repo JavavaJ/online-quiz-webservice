@@ -12,6 +12,7 @@ import java.util.List;
 public class SubmitAssignmentDTO {
 
     private Long id;
+    // todo rename to quizId
     private String name;
     private List<QuestionSelectionDTO> selections;
 

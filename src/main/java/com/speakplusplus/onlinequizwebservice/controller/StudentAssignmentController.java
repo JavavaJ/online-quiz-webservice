@@ -36,6 +36,12 @@ public class StudentAssignmentController {
         return assignmentService.getUserAssignments(student.getId());
     }
 
+    @GetMapping("uncompleted/number")
+    public Long getNumberOfUncompletedAssignments() {
+        User student = authenticationFacade.getCurrentUser();
+        return assignmentService.countUncompleted(student);
+    }
+
     @PostMapping("submit")
     public CheckedAssignmentDTO checkAssignment(@RequestBody SubmitAssignmentDTO submitAssignmentDTO) {
         User student = authenticationFacade.getCurrentUser();

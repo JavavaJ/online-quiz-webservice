@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionSelectionDTO {
 
-    private Long qid;
+    private Long qid; // todo quiz and questions ambiguity
     private String selection;
 }
