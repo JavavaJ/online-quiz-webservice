@@ -6,6 +6,7 @@ import com.speakplusplus.onlinequizwebservice.dto.AssignmentFullDTO;
 import com.speakplusplus.onlinequizwebservice.model.core.Assignment;
 import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.security.AuthenticationFacade;
+import com.speakplusplus.onlinequizwebservice.service.TutorshipService;
 import com.speakplusplus.onlinequizwebservice.service.AssignmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +20,19 @@ public class TeacherAssignmentController {
 
     private final AssignmentService assignmentService;
     private final AuthenticationFacade authenticationFacade;
+    private final TutorshipService tutorshipService;
 
     @PostMapping("save/student")
     public Long saveAssignment(@RequestBody AssignDTO assignDTO) {
+        User teacher = authenticationFacade.getCurrentUser();
+        tutorshipService.saveTutorship(teacher, assignDTO.getStudentEmails());
         return assignmentService.saveAssignment(assignDTO);
     }
 
     @PostMapping("save/group")
     public Long saveAssignment(@RequestBody AssignToGroupDTO dto) {
+        User teacher = authenticationFacade.getCurrentUser();
+        tutorshipService.saveTutorship(teacher, dto.getGroupId());
         return assignmentService.saveAssignment(dto);
     }
 

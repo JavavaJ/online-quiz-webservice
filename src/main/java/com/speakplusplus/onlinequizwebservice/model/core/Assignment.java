@@ -18,7 +18,6 @@ import java.util.Date;
 @Table(name = "T_ASSIGNMENTS")
 @NoArgsConstructor
 @Getter @Setter
-@EntityListeners(AuditingEntityListener.class)
 public class Assignment {
 
     @Id
@@ -58,7 +57,6 @@ public class Assignment {
     public void preUpdate() {
         updatedAt = OffsetDateTime.now();
     }
-
 
     @Override
     public String toString() {

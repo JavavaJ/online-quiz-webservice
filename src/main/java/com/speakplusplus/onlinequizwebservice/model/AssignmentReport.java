@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -47,12 +48,12 @@ public class AssignmentReport {
     @Column(name = "total_answers")
     private Integer totalAnswers;
 
-    @Column(name = "created")
-    private LocalDateTime createdAt;
+    @Column(name = "created", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime createdAt;
 
     @PrePersist
     public void prePersist() {
-        createdAt = LocalDateTime.now();
+        createdAt = OffsetDateTime.now();
     }
 
 }

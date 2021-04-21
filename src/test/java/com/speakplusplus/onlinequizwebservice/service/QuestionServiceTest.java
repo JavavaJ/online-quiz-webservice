@@ -37,6 +37,17 @@ class  QuestionServiceTest {
     }
 
     @Test
+    void printAllQuestions() throws JsonProcessingException {
+        List<Question> all = questionService.findAll();
+        List<Question> subList = all.subList(0, 14);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writerWithDefaultPrettyPrinter()
+            .writeValueAsString(subList);
+        System.out.println(json);
+    }
+
+    @Test
     public void getQuestionsByTopic() {
         List<Question> questions = questionService.getQuestionsByTopic("articles");
 

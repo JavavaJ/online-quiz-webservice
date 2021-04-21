@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -41,20 +42,20 @@ public class Quiz {
         inverseJoinColumns = {@JoinColumn(name = "fk_question")})
     private List<Question> questions;
 
-    @Column(name = "created")
-    private LocalDateTime createdAt;
+    @Column(name = "created", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime createdAt;
 
-    @Column(name = "updated")
-    private LocalDateTime updatedAt;
+    @Column(name = "updated", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private OffsetDateTime updatedAt;
 
     @PrePersist
     public void prePersist() {
-        createdAt = LocalDateTime.now();
+        createdAt = OffsetDateTime.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updatedAt = LocalDateTime.now();
+        updatedAt = OffsetDateTime.now();
     }
 
 }
