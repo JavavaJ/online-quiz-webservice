@@ -4,6 +4,7 @@ import com.speakplusplus.onlinequizwebservice.dto.LoginDTO;
 import com.speakplusplus.onlinequizwebservice.dto.PrincipalDto;
 import com.speakplusplus.onlinequizwebservice.dto.UserDTO;
 import com.speakplusplus.onlinequizwebservice.exception.UserNotFoundException;
+import com.speakplusplus.onlinequizwebservice.model.core.ConfirmationToken;
 import com.speakplusplus.onlinequizwebservice.model.core.Role;
 import com.speakplusplus.onlinequizwebservice.model.core.User;
 import com.speakplusplus.onlinequizwebservice.repo.UserRepo;
@@ -14,9 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +27,8 @@ public class UserService {
 
     private final UserRepo userRepo;
     private final RoleService roleService;
+    private final ConfirmationTokenService confirmationTokenService;
+    private final EmailConfirmationService emailConfirmationService;
     private final PasswordEncoder encoder;
 
     @Autowired
@@ -75,13 +80,31 @@ public class UserService {
 
     @Transactional
     public User saveUser(UserDTO userDto) {
-        User user = mapUserDTOToUser(userDto);
         Optional<User> userByEmail = userRepo.findUserByEmail(userDto.getEmail());
 //        return userByEmail.orElseGet(() -> userRepo.save(user));
         if (userByEmail.isPresent()) {
             throw new RuntimeException("Such user already exists");
         }
-        return userRepo.save(user);
+
+        User user = mapUserDTOToUser(userDto);
+        User savedUser = userRepo.save(user);
+
+        LocalDateTime now = LocalDateTime.now();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+            UUID.randomUUID()
+                .toString(),
+            now,
+            now.plusMinutes(15L),
+            null,
+            savedUser
+        );
+        confirmationTokenService.saveToken(confirmationToken);
+        emailConfirmationService.sendConfirmationLink(
+            savedUser.getName(),
+            savedUser.getEmail(),
+            buildValidationLink(confirmationToken.getToken()));
+
+        return savedUser;
     }
 
     private User mapUserDTOToUser(UserDTO userDTO) {
@@ -94,6 +117,11 @@ public class UserService {
         Role role = roleService.findById(userDTO.getRoleId());
         user.setRole(role);
         return user;
+    }
+
+    private String buildValidationLink(String confirmationToken) {
+        // todo finish the logic
+        return confirmationToken;
     }
 
     public PrincipalDto getPrincipalDto(User user) {

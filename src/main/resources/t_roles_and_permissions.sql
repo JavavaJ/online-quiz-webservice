@@ -18,7 +18,7 @@ INSERT INTO T_ROLE_PERMISSION (fk_role, fk_permission) VALUES (2, 1);
 INSERT INTO T_ROLE_PERMISSION (fk_role, fk_permission) VALUES (2, 2);
 INSERT INTO T_ROLE_PERMISSION (fk_role, fk_permission) VALUES (3, 1);
 
-INSERT INTO T_USER (id, name, email, password, role_id) VALUES (1, 'Alex', 'fedotenko@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', 1);
-INSERT INTO T_USER (id, name, email, password, role_id) VALUES (2, 'Maria', 'maria@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', 2);
-INSERT INTO T_USER (id, name, email, password, role_id) VALUES (3, 'Julia', 'julia@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', 3);
-INSERT INTO T_USER (id, name, email, password, role_id) VALUES (4, 'Bajaj', 'bajaj@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', 3);
+INSERT INTO T_USER (id, name, email, password, enabled, role_id) VALUES (1, 'Alex', 'fedotenko@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', true, 1);
+INSERT INTO T_USER (id, name, email, password, enabled, role_id) VALUES (2, 'Maria', 'maria@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', true, 2);
+INSERT INTO T_USER (id, name, email, password, enabled, role_id) VALUES (3, 'Julia', 'julia@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', true, 3);
+INSERT INTO T_USER (id, name, email, password, enabled, role_id) VALUES (4, 'Bajaj', 'bajaj@gmail.com', '$2a$10$4quzaMZv2fJwFkDVdiVyz.u4F0EyGhDP6nvUY0clLJ4/PvIEvCd.2', true, 3);

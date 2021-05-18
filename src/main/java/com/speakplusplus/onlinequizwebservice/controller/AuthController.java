@@ -46,6 +46,11 @@ public class AuthController {
                 throw new UsernameNotFoundException("User with userEmail: " + userEmail + " not found");
             }
 
+            if (Boolean.FALSE.equals(user.getEnabled())) {
+                // todo implement sending confirmation link to user email again
+                throw new IllegalStateException("User with userEmail: " + userEmail + " is not enabled");
+            }
+
             String token = jwtTokenProvider.createToken(userEmail, user.getRole());
             LoginDTO loginDTO = userService.getLoginDto(user, token);
 
@@ -59,7 +64,7 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public User saveUser(@RequestBody UserDTO userDTO) {
+    public User register(@RequestBody UserDTO userDTO) {
         return userService.saveUser(userDTO);
     }
 
